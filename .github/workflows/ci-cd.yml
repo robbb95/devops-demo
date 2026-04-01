@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+# Trigger: runs on every push to main
+on:
+  push:
+    branches: [main]
+
+# Required for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # ---- STEP 1: Build & Test ----
+  test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test framework
+        run: pip install pytest
+
+      - name: Run tests
+        run: pytest tests/ -v
+
+  # ---- STEP 2: Deploy to GitHub Pages ----
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: test  # Only runs if tests pass!
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

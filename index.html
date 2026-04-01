@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Demo</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0d1117;
+            color: #c9d1d9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+        h1 span {
+            color: #58a6ff;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            color: #8b949e;
+            margin-bottom: 2rem;
+        }
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 2rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .status .dot {
+            width: 10px;
+            height: 10px;
+            background: #3fb950;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        .version {
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        .version strong {
+            color: #58a6ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DevOps <span>Demo</span></h1>
+        <p class="subtitle">Deployed automatically via CI/CD</p>
+        <div class="status">
+            <span class="dot"></span>
+            <span>Pipeline: All checks passed</span>
+        </div>
+        <p class="version">Version <strong>1.0.0</strong></p>
+    </div>
+</body>
+</html>
